@@ -1,32 +1,4 @@
-class prendas {
-    constructor(pack, nombre, talle, color, precio) {
-        this.pack = pack;
-        this.nombre = nombre;
-        this.talle = talle;
-        this.color = color;
-        this.precio = precio;
-    }
-    mostrarProducto() {
-        let contenedorImagenes = document.createElement(`div`);
-        contenedorImagenes.innerHTML = `
-        <h4>${this.pack}<h4/></br>
-        <img src="img/caja.jpg"></img>
-        <p>Contiene:</p>
-        <p>Producto: ${this.nombre}</br> Talles: ${this.talle}</br> Colores: ${this.color}</br> Precio: $${this.precio}</p>
-        <button>Lo Quiero</button>
-        `;
-        document.body.appendChild(contenedorImagenes);
-    }
-    alerta() {
-        alert(`Pack de ${this.nombre}\n incluye\n 5 ${this.nombre}\n Talles: ${this.talle}\n Colores: ${this.color}\n Su precio es de: $${this.precio} `)
-    }
-}
 
-const pack1 = new prendas(`pack1`, `remeras`, `S-XL`, `rojo-negro-blanco`, 2500);
-const pack2 = new prendas(`pack2`, `camisas`, `S-XL`, `diversas estampas`, 3500);
-const pack3 = new prendas(`pack3`, `pantalones`, `40-58`, `azul-negro-gris`, 5000);
-const pack4 = new prendas(`pack4`, `camperas`, `S-XXL`, `consultar motivos`, 8000);
- 
 let total = 0;
 let precio = 0;
 let cantidad = 0;
@@ -75,6 +47,9 @@ function pedirCantidad() {
 }
 
 
+
+
+
 // funcionalidad-----------------------------------------------------------------------------------
 // pedirNombre();
 // const arrayLista = [];
@@ -114,22 +89,31 @@ function pedirCantidad() {
 // funcionalidad-----------------------------------------------------------------------------------
 
 
-// Crear Elementos-----------------------------------------------------------------------------------
 
-// titulo
-pedirNombre();
-let titulo = document.createElement(`h1`);
-titulo.innerHTML = `<h1>Bienvenido a nuestra tienda</h1>`;
-titulo.className = `titulos`
-document.body.appendChild(titulo);
+const botonesaniadir = document.querySelectorAll(`.btn`);
+botonesaniadir.forEach((event) => {
+    event.addEventListener('click', () => console.log(`click`));
+});
 
-// subtitulo
-let subtitulo = document.createElement(`h2`);
-subtitulo.innerHTML = `<h2>Nuestros packs son:</h2>`;
-subtitulo.className = `subtitulos`
-document.body.appendChild(subtitulo);
+const contenedorCompras = document.querySelector('.contenedorCompras');
 
-pack1.mostrarProducto();
-pack2.mostrarProducto();
-pack3.mostrarProducto();
-pack4.mostrarProducto();
+function aniadirItems(evento){
+    const buttom = evento.target;
+    const item = buttom.closest(`.products`);
+    const itemPrecio = item.querySelector(`.precio`).textContent;
+    const itemImg = item.querySelector(`.imagen`).src;
+    const itemNombre = item.querySelector(`.nombre`).textContent;
+    mostrarEnCarrito(itemNombre, itemPrecio, itemImg);
+}
+
+function mostrarEnCarrito(itemNombre, itemPrecio, itemImg){
+    const carritoDiv = document.createElement('div');
+    const miCarrito = `
+    <h1>Tu compra: ${itemNombre}</h1>
+    <img src="${itemImg}" class="pequeña"></img>
+    <h2>valor: ${itemPrecio}</h2>
+    `;
+    carritoDiv.innerHTML = miCarrito;
+    contenedorCompras.append(carritoDiv);
+}
+

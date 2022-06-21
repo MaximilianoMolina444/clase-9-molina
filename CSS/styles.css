@@ -4,3 +4,21 @@
 .subtitulos{
     text-align: center;
 }
+.pequeña{
+    width: 80px;
+}
+.contenedorCompras{
+    display: block;
+    text-align: center;
+    
+}
+.compra{
+    margin: 1rem;
+    display: inline-block;
+}
+#confirmarCompra{
+    text-align:right;
+    font-size:2rem;
+    background-color: green;
+    color: white;
+}
